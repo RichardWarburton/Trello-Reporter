@@ -6,4 +6,4 @@ TRELLO_TOKEN = "Insert your user token here"
 USER_EMAIL = "Insert your email here"
 
 # Optional Settings:
-# ONLY_BOARD = "Insert your "
+# ONLY_BOARDS = ["List the names", "of boards that you want to use here"]

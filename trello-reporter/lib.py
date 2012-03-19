@@ -9,8 +9,8 @@ one_week = timedelta(days=7)
 before = datetime.now() + one_week
 conn = TrelloConnection(TRELLO_KEY, USER_TOKEN)
 
-if locals().has_key('ONLY_BOARD'):
-    check = lambda board: board.name == 'Personal Todo'
+if locals().has_key('ONLY_BOARDS'):
+    check = lambda board: board.name in ONLY_BOARDS
 else:
     check = lambda board: True
 
