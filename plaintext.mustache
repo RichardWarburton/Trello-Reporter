@@ -1,0 +1,10 @@
+Hello {{username}},
+
+You have the follow trello tasks to do this week:
+
+{{#boards}}
+  {{board_name}}:
+  {{#tasks}}
+    {{msg}} @ {{date}}
+  {{/tasks}} {{#empty}} There are no tasks in this board.{{/empty}}
+{{/boards}}
