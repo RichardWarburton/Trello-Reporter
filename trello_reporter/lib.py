@@ -1,9 +1,11 @@
 from trollop import TrelloConnection
 from settings import *
 import settings
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 import pystache
 import re
+import smtplib
+from email.mime.text import MIMEText
 
 # NB: also includes actions from the past, deliberate behaviour
 one_week = timedelta(days=7)
@@ -35,7 +37,19 @@ class BoardView(pystache.View):
     def username(self):
         return conn.me.fullname
 
+def email_user():
+    me = 'no-reply@localhost'
+    you = USER_EMAIL
+    msg = MIMEText(BoardView().render())
+    msg['Subject'] = 'Your weekly email update for ' + str(date.today())
+    msg['From'] = me
+    msg['To'] = you
+
+    s = smtplib.SMTP('localhost')
+    s.sendmail(me, [you], msg.as_string())
+    s.quit()
+
 if __name__ == "__main__":
-    print BoardView().render()
+    email_user()
 
     # TODO: Email to USER_EMAIL
